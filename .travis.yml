@@ -1,18 +1,24 @@
-language: java
 sudo: false
 dist: trusty
 install: true
+matrix:
+  include:
+  - language: java
+    jdk: oraclejdk8
+    before_install:
+      - chmod +x test/runBackend.sh
+      - chmod +x test/after_success.sh
+    script:
+      - test/runBackend.sh
+    after_success: 
+      - test/after_success.sh
 
-jdk:
-- oraclejdk8
-
-before_install:
-- chmod +x test/run.sh
-
-script:
-- test/run.sh
-
-cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.sonar/cache'
+  - language: node_js
+    node_js: 8.1.3
+    before_install:
+      - chmod +x test/runFrontend.sh
+    before_script:
+      - npm install -g @angular/cli
+      - npm install
+    script:
+      - test/runFrontend.sh
