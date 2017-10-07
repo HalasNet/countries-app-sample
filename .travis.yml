@@ -7,7 +7,6 @@ matrix:
     jdk: oraclejdk8
     before_install:
       - chmod +x test/runBackend.sh
-      - chmod +x test/after_success.sh
     script:
       - test/runBackend.sh
 
