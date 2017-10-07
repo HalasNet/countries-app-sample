@@ -1,0 +1,15 @@
+spring:
+    application:
+        name: countries-app-sample
+server:
+    port: 8084
+management:
+    port: 8088
+    address: localhost
+    security:
+        enabled: true
+        role: SUPERUSER
+security:
+    user:
+        name: admin
+        password: secret
