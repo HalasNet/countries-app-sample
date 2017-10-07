@@ -10,8 +10,6 @@ matrix:
       - chmod +x test/after_success.sh
     script:
       - test/runBackend.sh
-    after_success: 
-      - test/after_success.sh
 
   - language: node_js
     node_js: 8.1.3
