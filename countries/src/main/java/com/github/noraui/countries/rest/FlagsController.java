@@ -32,7 +32,7 @@ import com.github.noraui.countries.service.PngContainer;
  * @author sgrillon
  */
 @Controller
-@RequestMapping("/flags/api")
+@RequestMapping("/countries/api/v1/flags")
 public class FlagsController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FlagsController.class);
