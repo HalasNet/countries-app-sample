@@ -13,3 +13,9 @@ security:
     user:
         name: admin
         password: secret
+logging:
+    level:
+        com.github: DEBUG
+    pattern:
+        console: "[%d{yyyy-MM-dd HH:mm:ss}]: %m%n"
+    file: countries.log

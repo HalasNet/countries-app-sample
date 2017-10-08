@@ -21,6 +21,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.github.noraui.countries.model.Country;
+
 /**
  * Basic integration tests for FlagsController.
  * 
@@ -67,21 +69,21 @@ public class FlagsControllerTests {
     
     @Test
     public void getPngFr() throws Exception {
-        byte[] expectedPngContent = IOUtils.toByteArray(getClass().getClassLoader().getResourceAsStream("/countries/api/v1/flags/fr_40_40.png"));
-        ResponseEntity<byte[]> entity = this.restTemplate.getForEntity("http://localhost:" + port + "/flags/api/fr/40/40", byte[].class);
+        byte[] expectedPngContent = IOUtils.toByteArray(getClass().getClassLoader().getResourceAsStream("flags/fr_40_40.png"));
+        ResponseEntity<byte[]> entity = this.restTemplate.getForEntity("http://localhost:" + port + "/countries/api/v1/flags/fr/40/40", byte[].class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(entity.getBody()).isEqualTo(expectedPngContent);
     }
     
     @Test
     public void getSvgError() throws Exception {
-        ResponseEntity<String> entity = this.restTemplate.getForEntity("http://localhost:" + port + "/flags/api/fake", String.class);
+        ResponseEntity<String> entity = this.restTemplate.getForEntity("http://localhost:" + port + "/countries/api/v1/flags/fake", String.class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
     
     @Test
     public void getPngError() throws Exception {
-        ResponseEntity<byte[]> entity = this.restTemplate.getForEntity("http://localhost:" + port + "/flags/api/fake/40/40", byte[].class);
+        ResponseEntity<byte[]> entity = this.restTemplate.getForEntity("http://localhost:" + port + "/countries/api/v1/flags/fake/40/40", byte[].class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
 

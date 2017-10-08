@@ -20,9 +20,9 @@ if diff -w ../test/health.json target/actual_health.json
 fi
 
 
-curl -s http://localhost:8084/flags/api/countries > target/actual_countries.json
-curl -s http://localhost:8084/flags/api/countries?lang=en > target/actual_countries_EN.json
-curl -s http://localhost:8084/flags/api/countries?lang=fr > target/actual_countries_FR.json
+curl -s http://localhost:8084/countries/api/v1/flags/countries > target/actual_countries.json
+curl -s http://localhost:8084/countries/api/v1/flags/countries?lang=en > target/actual_countries_EN.json
+curl -s http://localhost:8084/countries/api/v1/flags/countries?lang=fr > target/actual_countries_FR.json
 kill -9 $PID
 
 echo "Let's look at the actual results: `cat target/actual_countries.json`"
