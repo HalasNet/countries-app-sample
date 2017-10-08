@@ -161,7 +161,7 @@
 						<version>${maven-surefire-plugin.version}</version>
 						<configuration>
 							<includes>
-								<include>**/*Test.java</include>
+								<include>**/*Tests.java</include>
 							</includes>
 							<argLine>-Dfile.encoding=UTF-8 ${surefireArgLine}</argLine>
 						</configuration>
