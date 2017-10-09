@@ -1,6 +1,11 @@
 sudo: false
 dist: trusty
 install: true
+
+addons:
+  sonarcloud:
+    organization: "noraui"
+
 matrix:
   include:
   - language: java
