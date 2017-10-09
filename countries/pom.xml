@@ -50,7 +50,7 @@
 		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
-		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+		<maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
 		<jacoco-maven-plugin.version>0.7.7.201606060606</jacoco-maven-plugin.version>
 		<sonar.jacoco.reportPath>${project.testresult.directory}/coverage/jacoco/jacoco.exec</sonar.jacoco.reportPath>
 		<sonar-maven-plugin.version>3.0.1</sonar-maven-plugin.version>
@@ -67,18 +67,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.boot</groupId> -->
-<!-- 			<artifactId>spring-boot-starter-security</artifactId> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 
 		<!-- Batik -->
 		<dependency>
@@ -86,8 +86,16 @@
 			<artifactId>batik-transcoder</artifactId>
 			<version>${batik.version}</version>
 		</dependency>
-		
-				<!-- logback -->
+
+		<!-- xmlunit -->
+		<dependency>
+			<groupId>xmlunit</groupId>
+			<artifactId>xmlunit</artifactId>
+			<version>1.6</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- logback -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
@@ -120,6 +128,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>

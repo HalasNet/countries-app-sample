@@ -47,7 +47,6 @@ public class FlagServiceImplTests {
     public void testGetPngContentWithFr() throws IOException {
         byte[] expectedPngContent = IOUtils.toByteArray(getClass().getClassLoader().getResourceAsStream("flags/fr_40_40.png"));
         PngContainer actualPngContent = flagService.getPngFlag("fr", 40, 40);
-        System.out.println("sgr code " + actualPngContent.getErrorCode());
         assertThat(actualPngContent.getErrorCode()).isEqualTo(HttpStatus.OK);
         assertThat(actualPngContent.getPngContent()).isEqualTo(expectedPngContent);
     }
