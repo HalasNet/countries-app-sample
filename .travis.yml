@@ -1,6 +1,11 @@
 sudo: false
 dist: trusty
 install: true
+
+addons:
+  sonarcloud:
+    organization: "noraui"
+
 matrix:
   include:
   - language: java
@@ -9,6 +14,10 @@ matrix:
       - chmod +x test/runBackend.sh
     script:
       - test/runBackend.sh
+    cache:
+      directories:
+        - '$HOME/.m2/repository'
+        - '$HOME/.sonar/cache'  
 
   - language: node_js
     node_js: 8.1.3
