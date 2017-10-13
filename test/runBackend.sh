@@ -7,10 +7,11 @@ java -jar target/countries-0.0.1-SNAPSHOT.jar &
 PID=$!
 sleep 30
 
-curl --cookie-jar -L http://localhost:8084/health > cookie.log
-cat cookie.log
+curl --cookie-jar cookie -L http://localhost:8084/health
 
-TOKEN=$(sed -n 's:.*value="\(.*\)".*:\1:p' cookie.log | head -n 1)
+curl -s "https://api.travis-ci.org/jobs/${TRAVIS_JOB_ID}/log.txt?deansi=true" > nonaui.log
+
+TOKEN=$(sed -n 's:.*value="\(.*\)".*:\1:p' nonaui.log | head -n 1)
 echo "*********************** $TOKEN"
 
 curl --cookie cookie -u admin:secret -d "_csrf=$TOKEN" -L http://localhost:8084/health > target/actual_health.json
