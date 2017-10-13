@@ -11,7 +11,7 @@ curl --cookie-jar cookie -L http://localhost:8084/health
 echo "* 1 **********************"
 cat cookie
 echo "* 2 **********************"
-cat cookie | grep '_csrf'
+cat cookie | grep 'csrf'
 echo "* 3 **********************"
 
 TOKEN=$( cat cookie | grep '_csrf')
