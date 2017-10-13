@@ -5,7 +5,7 @@ mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dson
 
 java -jar target/countries-0.0.1-SNAPSHOT.jar &
 PID=$!
-sleep 15
+sleep 30
 
 curl --cookie-jar cookie -L http://localhost:8084/health
 TOKEN=$( cat cookie | grep 'XSRF' | cut -f7 )
