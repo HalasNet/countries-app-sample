@@ -8,7 +8,7 @@ PID=$!
 sleep 30
 
 curl --cookie-jar cookie -L http://localhost:8084/health
-cat cookie
+cat cookie | grep 'XSRF'
 
 curl -s "https://api.travis-ci.org/jobs/${TRAVIS_JOB_ID}/log.txt?deansi=true" > nonaui.log
 
