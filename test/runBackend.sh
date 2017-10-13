@@ -8,16 +8,7 @@ PID=$!
 sleep 30
 
 curl --cookie-jar cookie -L http://localhost:8084/health
-echo "* 1 **********************"
-cat cookie
-echo "* 2 **********************"
-cat cookie | grep 'JSESSIONID'
-echo "* 3 **********************"
-cat cookie | grep 'JSESSIONID' | cut -f7
-echo "* 4 **********************"
-
-curl -s "https://api.travis-ci.org/jobs/${TRAVIS_JOB_ID}/log.txt?deansi=true" > nonaui.log
-TOKEN=$(sed -n 's:.*value="\(.*\)".*:\1:p' nonaui.log | head -n 1)
+TOKEN=$( cat cookie | grep 'JSESSIONID' | cut -f7 )
 echo "*********************** $TOKEN"
 
 curl --cookie cookie -u admin:secret -d "_csrf=$TOKEN" -L http://localhost:8084/health > target/actual_health.json
