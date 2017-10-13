@@ -2,11 +2,15 @@ cd $(dirname $0)
 cd ../countries
 
 mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=noraui -Dsonar.login=$SONAR_TOKEN -Punit-tests
+
 java -jar target/countries-0.0.1-SNAPSHOT.jar &
 PID=$!
 sleep 15
 
-curl -u admin:secret -s http://localhost:8088/health > target/actual_health.json
+curl --cookie-jar cookie -L http://localhost:8084/health
+TOKEN=$( cat cookie | grep 'XSRF' | cut -f7 )
+
+curl --cookie cookie -u admin:secret -d "_csrf=$TOKEN" -L http://localhost:8084/health > target/actual_health.json
 echo "Let's look at the actual health: `cat target/actual_health.json`"
 echo "And compare it to: `cat ../test/health.json`"
 if diff -w ../test/health.json target/actual_health.json
