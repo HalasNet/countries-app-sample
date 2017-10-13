@@ -8,7 +8,10 @@ PID=$!
 sleep 30
 
 curl --cookie-jar cookie -L http://localhost:8084/health
-TOKEN=$( cat cookie | grep 'JSESSIONID' | cut -f7 )
+
+cat cookie | grep '_csrf'
+
+TOKEN=$( cat cookie | grep '_csrf')
 echo "*********************** $TOKEN"
 
 curl --cookie cookie -u admin:secret -d "_csrf=$TOKEN" -L http://localhost:8084/health > target/actual_health.json
