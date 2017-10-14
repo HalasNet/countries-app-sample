@@ -13,7 +13,7 @@ cat cookie
 echo "* 2 **********************"
 cat nonaui.log | grep 'csrf'
 echo "* 3 **********************"
-TOKEN=$(sed -n 's:.*csrf\(.*\)</form>.*:\1:p' nonaui.log | head -n 1)
+TOKEN=$(sed -n 's:.*csrf" value="\(.*\)" /></form>.*:\1:p' nonaui.log | head -n 1)
 echo "*********************** $TOKEN"
 
 curl --cookie cookie -u admin:secret -d "_csrf=$TOKEN" -L http://localhost:8084/health > target/actual_health.json
