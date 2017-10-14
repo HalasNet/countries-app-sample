@@ -7,14 +7,13 @@ java -jar target/countries-0.0.1-SNAPSHOT.jar &
 PID=$!
 sleep 30
 
-curl --cookie-jar cookie -L http://localhost:8084/health
+curl --cookie-jar cookie -L http://localhost:8084/health > nonaui.log
 echo "* 1 **********************"
 cat cookie
 echo "* 2 **********************"
-cat cookie | grep 'csrf'
+cat nonaui.log | grep 'csrf'
 echo "* 3 **********************"
-
-TOKEN=$( cat cookie | grep '_csrf')
+TOKEN=$(sed -n 's:.*csrf\(.*\)</form>.*:\1:p' nonaui.log | head -n 1)
 echo "*********************** $TOKEN"
 
 curl --cookie cookie -u admin:secret -d "_csrf=$TOKEN" -L http://localhost:8084/health > target/actual_health.json
