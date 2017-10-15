@@ -16,7 +16,7 @@ echo "* 3 **********************"
 TOKEN=$(sed -n 's:.*csrf" value="\(.*\)" /></form>.*:\1:p' nonaui.log | head -n 1)
 echo "*********************** $TOKEN"
 
-curl --cookie cookie -d "username=admin&password=secret&_csrf=$TOKEN" -L http://localhost:8084/login > target/actual_health.json
+curl --cookie cookie --cookie-jar cookie -d "username=admin&password=secret&_csrf=$TOKEN" -L http://localhost:8084/login > target/actual_health.json
 echo "Let's look at the actual health: `cat target/actual_health.json`"
 echo "And compare it to: `cat ../test/health.json`"
 if diff -w ../test/health.json target/actual_health.json
@@ -27,8 +27,7 @@ if diff -w ../test/health.json target/actual_health.json
         exit 255
 fi
 
-curl --cookie cookie -s http://localhost:8084/health
-curl --cookie cookie -d "username=admin&password=secret&_csrf=$TOKEN" -L http://localhost:8084/login > target/health.log
+curl --cookie-jar cookie -s http://localhost:8084/health
 echo "* debug ********************** `cat target/health.log`"
 
 curl --cookie cookie -s http://localhost:8084/countries/api/v1/flags/countries > target/actual_countries.json
