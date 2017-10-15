@@ -28,7 +28,7 @@ if diff -w ../test/health.json target/actual_health.json
 fi
 
 curl --cookie cookie -s http://localhost:8084/health
-curl --cookie cookie -d "username=admin&password=secret&_csrf=$TOKEN" -L http://localhost:8084/login > target/health.json
+curl --cookie cookie -d "username=admin&password=secret&_csrf=$TOKEN" -L http://localhost:8084/login > target/health.log
 echo "* debug ********************** `cat target/health.log`"
 
 curl --cookie cookie -s http://localhost:8084/countries/api/v1/flags/countries > target/actual_countries.json
