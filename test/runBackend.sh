@@ -27,7 +27,7 @@ if diff -w ../test/health.json target/actual_health.json
         exit 255
 fi
 
-curl --cookie-jar cookie -s http://localhost:8084/health
+curl --cookie cookie --cookie-jar -s http://localhost:8084/health > target/health.log 
 echo "* debug ********************** `cat target/health.log`"
 
 curl --cookie cookie -s http://localhost:8084/countries/api/v1/flags/countries > target/actual_countries.json
