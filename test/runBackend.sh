@@ -8,11 +8,6 @@ PID=$!
 sleep 30
 
 curl --cookie-jar cookie -L http://localhost:8084/health > nonaui.log
-echo "* 1 **********************"
-cat cookie
-echo "* 2 **********************"
-cat nonaui.log | grep 'csrf'
-echo "* 3 **********************"
 TOKEN=$(sed -n 's:.*csrf" value="\(.*\)" /></form>.*:\1:p' nonaui.log | head -n 1)
 echo "*********************** $TOKEN"
 
@@ -26,9 +21,6 @@ if diff -w ../test/health.json target/actual_health.json
         echo FAIL
         exit 255
 fi
-
-curl --cookie cookie --cookie-jar -s http://localhost:8084/health > target/health.log 
-echo "* debug ********************** `cat target/health.log`"
 
 curl --cookie cookie -s http://localhost:8084/countries/api/v1/flags/countries > target/actual_countries.json
 curl --cookie cookie -s http://localhost:8084/countries/api/v1/flags/countries?lang=en > target/actual_countries_EN.json
