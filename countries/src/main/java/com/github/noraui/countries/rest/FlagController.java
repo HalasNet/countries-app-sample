@@ -5,8 +5,6 @@
  */
 package com.github.noraui.countries.rest;
 
-import java.net.MalformedURLException;
-import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -16,15 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.noraui.countries.model.Country;
-import com.github.noraui.countries.service.CountryService;
 import com.github.noraui.countries.service.FlagService;
 import com.github.noraui.countries.service.PngContainer;
 
@@ -33,27 +27,12 @@ import com.github.noraui.countries.service.PngContainer;
  */
 @Controller
 @RequestMapping("/countries/api/v1/flags")
-public class FlagsController {
+public class FlagController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FlagsController.class);
-
-    @Autowired
-    private CountryService countryService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(FlagController.class);
 
     @Autowired
     private FlagService flagService;
-
-    /**
-     * @param lang
-     * @return all countries (Code ISO 3166-1 numerical, Code ISO 3166-1 alpha2, Code ISO 3166-1 alpha3, label of country) in a list.
-     * @throws MalformedURLException
-     */
-    @CrossOrigin(origins = "http://localhost:8085")
-    @RequestMapping(value = "/countries", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Country> getCountries(@RequestParam(value = "lang", defaultValue = "en") String lang) throws MalformedURLException {
-        LOGGER.debug("Get countries:  lang[{}]", lang);
-        return countryService.getAll(lang);
-    }
 
     /**
      * @param countryAlpha2Code

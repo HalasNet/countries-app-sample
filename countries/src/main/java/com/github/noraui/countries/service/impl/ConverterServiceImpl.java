@@ -14,9 +14,7 @@ import com.github.noraui.countries.service.ConverterService;
 import com.github.noraui.countries.service.PngContainer;
 
 /**
- * 
  * @author sgrillon
- *
  */
 @Component
 public class ConverterServiceImpl implements ConverterService {
@@ -26,6 +24,9 @@ public class ConverterServiceImpl implements ConverterService {
     @Autowired
     private PngContainer pngContainer;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PngContainer svg2png(String countryCode, int width, int height) {
         LOGGER.debug("svg2png : countryCode[{}], width[{}], height[{}]", countryCode, width, height);

@@ -21,9 +21,7 @@ import org.springframework.stereotype.Component;
 import com.github.noraui.countries.service.PngContainer;
 
 /**
- * 
  * @author sgrillon
- *
  */
 @Component
 public class PngContainerImpl implements PngContainer {
@@ -34,6 +32,9 @@ public class PngContainerImpl implements PngContainer {
 
     private HttpStatus errorCode;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void convertSvgToPng(String countryCode, int width, int height) {
 
@@ -47,9 +48,7 @@ public class PngContainerImpl implements PngContainer {
             pngTranscoder.addTranscodingHint(SVGAbstractTranscoder.KEY_WIDTH, (float) width);
             pngTranscoder.addTranscodingHint(SVGAbstractTranscoder.KEY_HEIGHT, (float) height);
         } catch (IllegalArgumentException e) {
-            LOGGER.error(
-                    "Exception caught during the conversion svg to png : illegal arg for width (int >= 0) or height (int >= 0)",
-                    e);
+            LOGGER.error("Exception caught during the conversion svg to png : illegal arg for width (int >= 0) or height (int >= 0)", e);
             pngContent = null;
             errorCode = HttpStatus.BAD_REQUEST;
             return;
@@ -86,12 +85,18 @@ public class PngContainerImpl implements PngContainer {
         errorCode = HttpStatus.OK;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public byte[] getPngContent() {
         LOGGER.debug("getPngContent");
         return pngContent == null ? null : pngContent.clone();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public HttpStatus getErrorCode() {
         LOGGER.debug("getErrorCode");

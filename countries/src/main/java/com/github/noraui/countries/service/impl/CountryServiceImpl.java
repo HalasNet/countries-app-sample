@@ -21,9 +21,7 @@ import com.github.noraui.countries.model.Country;
 import com.github.noraui.countries.service.CountryService;
 
 /**
- * 
  * @author sgrillon
- *
  */
 @Component
 public class CountryServiceImpl implements CountryService {
@@ -33,11 +31,8 @@ public class CountryServiceImpl implements CountryService {
     @Value("$i18n.config")
     private String i18nPath;
 
-    // TODO: https://es.wikipedia.org/wiki/ISO_3166-1
     /**
      * {@inheritDoc}
-     * 
-     * @throws MalformedURLException
      */
     @Override
     public List<Country> getAll(String lang) throws MalformedURLException {

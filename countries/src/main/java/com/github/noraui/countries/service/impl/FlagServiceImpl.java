@@ -19,9 +19,7 @@ import com.github.noraui.countries.service.FlagService;
 import com.github.noraui.countries.service.PngContainer;
 
 /**
- * 
  * @author sgrillon
- *
  */
 @Component
 public class FlagServiceImpl implements FlagService {
@@ -31,12 +29,18 @@ public class FlagServiceImpl implements FlagService {
     @Autowired
     private ConverterService converterService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getSvgFlag(String countryAlpha2Code) {
         LOGGER.debug("getSvgFlag : countryAlpha2Code[{}]", countryAlpha2Code);
         return this.getSvgContent(countryAlpha2Code);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PngContainer getPngFlag(String countryAlpha2Code, int width, int height) {
         LOGGER.debug("getPngFlag : countryAlpha2Code[{}], width[{}], height[{}]", countryAlpha2Code, width, height);
