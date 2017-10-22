@@ -22,9 +22,9 @@ if diff -w ../test/health.json target/actual_health.json
         exit 255
 fi
 
-curl --cookie cookie -s http://localhost:8084/countries/api/v1/flags/countries > target/actual_countries.json
-curl --cookie cookie -s http://localhost:8084/countries/api/v1/flags/countries?lang=en > target/actual_countries_EN.json
-curl --cookie cookie -s http://localhost:8084/countries/api/v1/flags/countries?lang=fr > target/actual_countries_FR.json
+curl --cookie cookie -s http://localhost:8084/countries/api/v1/countries/all > target/actual_countries.json
+curl --cookie cookie -s http://localhost:8084/countries/api/v1/countries/all?lang=en > target/actual_countries_EN.json
+curl --cookie cookie -s http://localhost:8084/countries/api/v1/countries/all?lang=fr > target/actual_countries_FR.json
 kill -9 $PID
 
 echo "Let's look at the actual results: `cat target/actual_countries.json`"
