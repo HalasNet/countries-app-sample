@@ -11,7 +11,7 @@ curl --cookie-jar cookie -L http://localhost:8084/health > nonaui.log
 TOKEN=$(sed -n 's:.*csrf" value="\(.*\)" /></form>.*:\1:p' nonaui.log | head -n 1)
 echo "*********************** $TOKEN"
 
-curl --cookie cookie --cookie-jar cookie -d "username=admin&password=secret&_csrf=$TOKEN" -L http://localhost:8084/login > target/actual_health.json
+curl --cookie cookie --cookie-jar cookie -d "username=admin&password=admin&_csrf=$TOKEN" -L http://localhost:8084/login > target/actual_health.json
 echo "Let's look at the actual health: `cat target/actual_health.json`"
 echo "And compare it to: `cat ../test/health.json`"
 if diff -w ../test/health.json target/actual_health.json
@@ -22,9 +22,9 @@ if diff -w ../test/health.json target/actual_health.json
         exit 255
 fi
 
-curl --cookie cookie -s http://localhost:8084/countries/api/v1/countries/all > target/actual_countries.json
-curl --cookie cookie -s http://localhost:8084/countries/api/v1/countries/all?lang=en > target/actual_countries_EN.json
-curl --cookie cookie -s http://localhost:8084/countries/api/v1/countries/all?lang=fr > target/actual_countries_FR.json
+curl --cookie cookie -s http://localhost:8084/api/v1/countries/all > target/actual_countries.json
+curl --cookie cookie -s http://localhost:8084/api/v1/countries/all?lang=en > target/actual_countries_EN.json
+curl --cookie cookie -s http://localhost:8084/api/v1/countries/all?lang=fr > target/actual_countries_FR.json
 kill -9 $PID
 
 echo "Let's look at the actual results: `cat target/actual_countries.json`"

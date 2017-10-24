@@ -1,8 +1,1 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-.project
-.settings
-.classpath
-.idea
-*.iml
-countries.log
+/target/
