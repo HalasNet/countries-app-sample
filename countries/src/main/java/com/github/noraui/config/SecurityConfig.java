@@ -29,10 +29,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // If Security is not working check application.properties if it is set to ignore
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.exceptionHandling().and().anonymous().and().csrf().disable().addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class)
-                .addFilterBefore(new VerifyTokenFilter(tokenUtil), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new GenerateTokenForUserFilter("/session", authenticationManager(), tokenUtil), UsernamePasswordAuthenticationFilter.class).authorizeRequests().anyRequest()
-                .authenticated();
+        // @formatter:off
+        http.exceptionHandling().and().anonymous().and().csrf().disable()
+            .addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class)
+            .addFilterBefore(new VerifyTokenFilter(tokenUtil), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(new GenerateTokenForUserFilter("/session", authenticationManager(), tokenUtil), UsernamePasswordAuthenticationFilter.class)
+            .authorizeRequests().antMatchers("/health").permitAll()
+            .anyRequest().authenticated();
+        // @formatter:on
     }
 
 }
