@@ -1,6 +1,10 @@
+/**
+ * Copyright (c) 2017 NoraUi Oraganization https://github.com/NoraUi/countrie-app-sample
+ * All rights reserved.
+ * GNU AFFERO GENERAL PUBLIC LICENSE
+ */
 package com.github.noraui.config;
 
-// import static springfox.documentation.builders.PathSelectors.ant;
 import static com.google.common.collect.Lists.newArrayList;
 
 import org.joda.time.LocalDate;
@@ -40,7 +44,6 @@ public class SwaggerConfig {
 
     @Bean
     SecurityConfiguration security() {
-        // return new SecurityConfiguration("emailSecurity_client", "secret", "Spring", "emailSecurity", "apiKey", ApiKeyVehicle.HEADER, "api_key", ",");
         return new SecurityConfiguration("emailSecurity_client", "secret", "Spring", "emailSecurity", "", ApiKeyVehicle.HEADER, "", ",");
     }
 

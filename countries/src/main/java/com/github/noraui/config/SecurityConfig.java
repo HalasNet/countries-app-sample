@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2017 NoraUi Oraganization https://github.com/NoraUi/countrie-app-sample
+ * All rights reserved.
+ * GNU AFFERO GENERAL PUBLIC LICENSE
+ */
 package com.github.noraui.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/", "/resources/**", "/static/**", "/public/**", "/webui/**", "/h2-console/**", "/configuration/**", "/swagger-ui/**", "/swagger-resources/**", "/api-docs",
+        web.ignoring().antMatchers("/", "/resources/**", "/static/**", "/public/**", "/webclient/**", "/h2-console/**", "/configuration/**", "/swagger-ui/**", "/swagger-resources/**", "/api-docs",
                 "/api-docs/**", "/v2/api-docs/**", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.gif", "/**/*.svg", "/**/*.ico", "/**/*.ttf", "/**/*.woff");
     }
 
@@ -34,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class)
             .addFilterBefore(new VerifyTokenFilter(tokenUtil), UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(new GenerateTokenForUserFilter("/session", authenticationManager(), tokenUtil), UsernamePasswordAuthenticationFilter.class)
-            .authorizeRequests().antMatchers("/health").permitAll()
+            .authorizeRequests().antMatchers("/health").hasRole("SUPERUSER")
             .anyRequest().authenticated();
         // @formatter:on
     }

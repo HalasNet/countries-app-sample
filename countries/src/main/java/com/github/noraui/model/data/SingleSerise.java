@@ -1,18 +1,21 @@
+/**
+ * Copyright (c) 2017 NoraUi Oraganization https://github.com/NoraUi/countrie-app-sample
+ * All rights reserved.
+ * GNU AFFERO GENERAL PUBLIC LICENSE
+ */
 package com.github.noraui.model.data;
 
-import lombok.*;
-import java.util.*;
 import java.math.BigDecimal;
-import javax.persistence.*;
-import io.swagger.annotations.ApiModelProperty;
+
+import lombok.Data;
 
 @Data
-public class SingleSerise  {
+public class SingleSerise {
     private String name;
     private BigDecimal value;
 
-    public SingleSerise( String name, BigDecimal value){
-        this.name  = name;
+    public SingleSerise(String name, BigDecimal value) {
+        this.name = name;
         this.value = value;
     }
 }

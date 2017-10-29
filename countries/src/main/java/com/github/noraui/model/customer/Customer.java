@@ -1,16 +1,22 @@
+/**
+ * Copyright (c) 2017 NoraUi Oraganization https://github.com/NoraUi/countrie-app-sample
+ * All rights reserved.
+ * GNU AFFERO GENERAL PUBLIC LICENSE
+ */
 package com.github.noraui.model.customer;
 
-import lombok.*;
-import java.util.*;
-import javax.persistence.*;
-import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "customers")
-public class Customer  {
+public class Customer {
 
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    // @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Integer id;
     private String lastName;
@@ -24,5 +30,7 @@ public class Customer  {
     private String state;
     private String postalCode;
     private String country;
-    public Customer(){}
+
+    public Customer() {
+    }
 }

@@ -1,62 +1,124 @@
+/**
+ * Copyright (c) 2017 NoraUi Oraganization https://github.com/NoraUi/countrie-app-sample
+ * All rights reserved.
+ * GNU AFFERO GENERAL PUBLIC LICENSE
+ */
 package com.github.noraui.model.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import javax.persistence.*;
-import lombok.*;
-import javax.validation.constraints.*;
-import java.util.EnumSet;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class User {
     @Id
-    @Getter @Setter private String userId;
-    @Getter @Setter private String password = "";
-    @Getter @Setter private String company;
-    @Getter @Setter private String firstName;
-    @Getter @Setter private String lastName;
-    @Getter @Setter private String email;
+    @Getter
+    @Setter
+    private String userId;
+    @Getter
+    @Setter
+    private String password = "";
+    @Getter
+    @Setter
+    private String company;
+    @Getter
+    @Setter
+    private String firstName;
+    @Getter
+    @Setter
+    private String lastName;
+    @Getter
+    @Setter
+    private String email;
 
-    @JsonIgnore @Getter @Setter private int    securityProviderId;
-    @JsonIgnore @Getter @Setter private int    defaultCustomerId;
+    @JsonIgnore
+    @Getter
+    @Setter
+    private int securityProviderId;
+    @JsonIgnore
+    @Getter
+    @Setter
+    private int defaultCustomerId;
 
-    @JsonIgnore @Getter @Setter private String phone;
-    @JsonIgnore @Getter @Setter private String address1;
-    @JsonIgnore @Getter @Setter private String address2;
-    @JsonIgnore @Getter @Setter private String country;
-    @JsonIgnore @Getter @Setter private String postal;
+    @JsonIgnore
+    @Getter
+    @Setter
+    private String phone;
+    @JsonIgnore
+    @Getter
+    @Setter
+    private String address1;
+    @JsonIgnore
+    @Getter
+    @Setter
+    private String address2;
+    @JsonIgnore
+    @Getter
+    @Setter
+    private String country;
+    @JsonIgnore
+    @Getter
+    @Setter
+    private String postal;
 
     @Enumerated(EnumType.STRING)
-    @Getter @Setter private Role role;
+    @Getter
+    @Setter
+    private Role role;
 
-    //@JsonIgnore
-    @JsonIgnore @Getter @Setter private boolean isActive;
-    //@JsonIgnore
-    @JsonIgnore @Getter @Setter private boolean isBlocked;
-    @JsonIgnore @Getter @Setter private String  secretQuestion;
-    @JsonIgnore @Getter @Setter private String  secretAnswer;
-    @JsonIgnore @Getter @Setter private boolean enableBetaTesting;
-    @JsonIgnore @Getter @Setter private boolean enableRenewal;
+    // @JsonIgnore
+    @JsonIgnore
+    @Getter
+    @Setter
+    private boolean isActive;
+    // @JsonIgnore
+    @JsonIgnore
+    @Getter
+    @Setter
+    private boolean isBlocked;
+    @JsonIgnore
+    @Getter
+    @Setter
+    private String secretQuestion;
+    @JsonIgnore
+    @Getter
+    @Setter
+    private String secretAnswer;
+    @JsonIgnore
+    @Getter
+    @Setter
+    private boolean enableBetaTesting;
+    @JsonIgnore
+    @Getter
+    @Setter
+    private boolean enableRenewal;
 
-    public User(){
+    public User() {
         this("new", "PASSWORD", Role.USER, "new", "new", true, "", "", "", "", "", "", "", "", true, false);
     }
 
-    public User(String userId, String password, String firstName, String lastName){
+    public User(String userId, String password, String firstName, String lastName) {
         this(userId, password, Role.USER, firstName, lastName, true, "", "", "", "", "", "", "", "", true, false);
     }
 
-    public User(String userId, String password, Role role, String firstName, String lastName){
+    public User(String userId, String password, Role role, String firstName, String lastName) {
         this(userId, password, role, firstName, lastName, true, "", "", "", "", "", "", "", "", true, false);
     }
 
-    public User(String userId, String password, Role role, String firstName, String lastName, boolean isActive){
+    public User(String userId, String password, Role role, String firstName, String lastName, boolean isActive) {
         this(userId, password, role, firstName, lastName, isActive, "", "", "", "", "", "", "", "", true, false);
     }
 
-    public User(String userId, String password, Role role, String firstName, String lastName, boolean isActive,
-         String company, String phone, String address1, String address2, String country, String postal,
-         String secretQuestion, String secretAnswer, boolean enableRenewal, boolean enableBetaTesting){
+    public User(String userId, String password, Role role, String firstName, String lastName, boolean isActive, String company, String phone, String address1, String address2, String country,
+            String postal, String secretQuestion, String secretAnswer, boolean enableRenewal, boolean enableBetaTesting) {
         this.setUserId(userId);
         this.setEmail(userId);
         this.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -76,7 +138,7 @@ public class User {
         this.setEnableBetaTesting(enableBetaTesting);
     }
 
-    public String getFullName(){
+    public String getFullName() {
         return this.firstName + this.lastName;
     }
 }

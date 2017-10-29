@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017 NoraUi Oraganization https://github.com/NoraUi/countrie-app-sample
  * All rights reserved.
  * GNU AFFERO GENERAL PUBLIC LICENSE
@@ -6,9 +6,7 @@
 package com.github.noraui.model.world;
 
 /**
- * 
  * @author sgrillon
- *
  */
 public class Country {
 
@@ -38,7 +36,7 @@ public class Country {
         this.alpha3 = "";
         this.label = "";
     }
-    
+
     public Country(int num, String alpha2, String alpha3, String label) {
         this.num = num;
         this.alpha2 = alpha2;

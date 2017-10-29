@@ -1,19 +1,24 @@
+/**
+ * Copyright (c) 2017 NoraUi Oraganization https://github.com/NoraUi/countrie-app-sample
+ * All rights reserved.
+ * GNU AFFERO GENERAL PUBLIC LICENSE
+ */
 package com.github.noraui.api;
 
-import org.springframework.stereotype.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import lombok.extern.slf4j.Slf4j;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Slf4j
 @ApiIgnore
 @Controller // Dont use RestController as this method is mapping to a static file not a JSON
 public class MainController {
 
-  @RequestMapping(value={"/"})
-	public String index() {
-		return "index.html";
-	}
+    @RequestMapping(value = { "/" })
+    public String index() {
+        return "index.html";
+    }
 
 }

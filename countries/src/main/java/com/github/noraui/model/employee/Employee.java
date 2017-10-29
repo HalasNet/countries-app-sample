@@ -1,30 +1,36 @@
+/**
+ * Copyright (c) 2017 NoraUi Oraganization https://github.com/NoraUi/countrie-app-sample
+ * All rights reserved.
+ * GNU AFFERO GENERAL PUBLIC LICENSE
+ */
 package com.github.noraui.model.employee;
 
-import lombok.*;
-import java.util.*;
-import javax.persistence.*;
-import io.swagger.annotations.ApiModelProperty;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "employees")
-public class Employee  {
+public class Employee {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    // @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String  lastName;
-    private String  firstName;
-    private String  email;
-    private String  avatar;
-    private String  jobTitle;
-    private String  department;
+    private String lastName;
+    private String firstName;
+    private String email;
+    private String avatar;
+    private String jobTitle;
+    private String department;
     private Integer managerId;
-    private String  phone;
-    private String  address1;
-    private String  address2;
-    private String  city;
-    private String  state;
-    private String  postalCode;
-    private String  country;
+    private String phone;
+    private String address1;
+    private String address2;
+    private String city;
+    private String state;
+    private String postalCode;
+    private String country;
 }

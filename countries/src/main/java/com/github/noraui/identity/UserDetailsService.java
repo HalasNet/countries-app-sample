@@ -1,20 +1,18 @@
+/**
+ * Copyright (c) 2017 NoraUi Oraganization https://github.com/NoraUi/countrie-app-sample
+ * All rights reserved.
+ * GNU AFFERO GENERAL PUBLIC LICENSE
+ */
 package com.github.noraui.identity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.github.noraui.model.user.Role;
 import com.github.noraui.model.user.User;
 import com.github.noraui.repository.UserRepo;
-
-import java.util.Optional;
 
 @Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
@@ -28,13 +26,12 @@ public class UserDetailsService implements org.springframework.security.core.use
 
         final User user = userRepo.findOneByUserId(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         TokenUser currentUser;
-        if (user.isActive() == true){
+        if (user.isActive() == true) {
             currentUser = new TokenUser(user);
-        }
-        else{
+        } else {
             throw new DisabledException("User is not activated (Disabled User)");
-            //If pending activation return a disabled user
-            //currentUser = new TokenUser(user, false);
+            // If pending activation return a disabled user
+            // currentUser = new TokenUser(user, false);
         }
         detailsChecker.check(currentUser);
         return currentUser;
