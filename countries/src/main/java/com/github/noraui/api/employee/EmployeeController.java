@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.noraui.model.employee.Employee;
 import com.github.noraui.model.employee.EmployeeResponse;
 import com.github.noraui.model.response.OperationResponse;
-import com.github.noraui.model.response.OperationResponse.ResponseStatusEnum;
+import com.github.noraui.model.response.ResponseStatus;
 import com.github.noraui.repository.EmployeeRepo;
 
 import io.swagger.annotations.Api;
@@ -63,11 +63,11 @@ public class EmployeeController {
     public OperationResponse addNewEmployee(@RequestBody Employee employee, HttpServletRequest req) {
         OperationResponse resp = new OperationResponse();
         if (this.employeeRepo.exists(employee.getId())) {
-            resp.setOperationStatus(ResponseStatusEnum.ERROR);
+            resp.setOperationStatus(ResponseStatus.ERROR);
             resp.setOperationMessage("Unable to add Employee - Employee allready exist ");
         } else {
             Employee addedEmployee = this.employeeRepo.save(employee);
-            resp.setOperationStatus(ResponseStatusEnum.SUCCESS);
+            resp.setOperationStatus(ResponseStatus.SUCCESS);
             resp.setOperationMessage("Employee Added");
         }
         return resp;
@@ -80,15 +80,15 @@ public class EmployeeController {
         try {
             if (this.employeeRepo.exists(employeeId)) {
                 this.employeeRepo.delete(employeeId);
-                resp.setOperationStatus(ResponseStatusEnum.SUCCESS);
+                resp.setOperationStatus(ResponseStatus.SUCCESS);
                 resp.setOperationMessage("Employee Deleted");
             } else {
-                resp.setOperationStatus(ResponseStatusEnum.ERROR);
+                resp.setOperationStatus(ResponseStatus.ERROR);
                 resp.setOperationMessage("No Employee Exist");
             }
         } catch (Exception ge) {
             System.out.println("========= MRIN GENERIC EXCEPTION ============");
-            resp.setOperationStatus(ResponseStatusEnum.ERROR);
+            resp.setOperationStatus(ResponseStatus.ERROR);
             resp.setOperationMessage(ge.getMessage());
         }
 

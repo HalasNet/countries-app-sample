@@ -52,7 +52,7 @@ public class PageResponse extends OperationResponse {
         // this.items = pg.getContent();
         this.sort = pg.getSort();
         if (setDefaultMessage == true) {
-            this.setOperationStatus(ResponseStatusEnum.SUCCESS);
+            this.setOperationStatus(ResponseStatus.SUCCESS);
             this.setOperationMessage("Page " + (pg.getNumber() + 1) + " of " + pg.getTotalPages());
         }
     }
@@ -66,7 +66,7 @@ public class PageResponse extends OperationResponse {
         this.totalPages = 1;
         this.pageSize = count;
         if (setDefaultMessage == true) {
-            this.setOperationStatus(ResponseStatusEnum.SUCCESS);
+            this.setOperationStatus(ResponseStatus.SUCCESS);
             this.setOperationMessage("Total " + count + " items ");
         }
     }

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CorsFilter implements javax.servlet.Filter {
+public class ConfigCorsFilter implements javax.servlet.Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse res = (HttpServletResponse) response;

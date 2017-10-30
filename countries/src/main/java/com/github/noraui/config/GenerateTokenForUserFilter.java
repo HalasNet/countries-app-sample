@@ -28,7 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.github.noraui.identity.TokenUser;
 import com.github.noraui.identity.TokenUtil;
-import com.github.noraui.model.response.OperationResponse.ResponseStatusEnum;
+import com.github.noraui.model.response.ResponseStatus;
 import com.github.noraui.model.session.SessionItem;
 import com.github.noraui.model.session.SessionResponse;
 
@@ -79,7 +79,7 @@ public class GenerateTokenForUserFilter extends AbstractAuthenticationProcessing
         respItem.setEmail(tokenUser.getUser().getEmail());
         respItem.setToken(tokenString);
 
-        resp.setOperationStatus(ResponseStatusEnum.SUCCESS);
+        resp.setOperationStatus(ResponseStatus.SUCCESS);
         resp.setOperationMessage("Login Success");
         resp.setItem(respItem);
         String jsonRespString = ow.writeValueAsString(resp);

@@ -17,4 +17,12 @@ public class Login {
     @ApiModelProperty(example = "demo", required = true)
     private String password = "";
 
+    public Login() {
+    }
+
+    public Login(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
 }

@@ -16,4 +16,5 @@ import lombok.EqualsAndHashCode;
 public class SessionResponse extends OperationResponse {
     @ApiModelProperty(required = true, value = "")
     private SessionItem item;
+
 }

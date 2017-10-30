@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.noraui.model.response.OperationResponse.ResponseStatusEnum;
+import com.github.noraui.model.response.ResponseStatus;
 import com.github.noraui.model.session.SessionItem;
 import com.github.noraui.model.session.SessionResponse;
 import com.github.noraui.model.user.Login;
@@ -58,11 +58,11 @@ public class SessionController {
             sessionItem.setEmail(user.getEmail());
             // sessionItem.setRole(user.getRole());
 
-            resp.setOperationStatus(ResponseStatusEnum.SUCCESS);
+            resp.setOperationStatus(ResponseStatus.SUCCESS);
             resp.setOperationMessage("Dummy Login Success");
             resp.setItem(sessionItem);
         } else {
-            resp.setOperationStatus(ResponseStatusEnum.ERROR);
+            resp.setOperationStatus(ResponseStatus.ERROR);
             resp.setOperationMessage("Login Failed");
         }
         return resp;

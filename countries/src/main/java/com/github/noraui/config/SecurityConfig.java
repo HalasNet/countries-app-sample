@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http.exceptionHandling().and().anonymous().and().csrf().disable()
-            .addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class)
+            .addFilterBefore(new ConfigCorsFilter(), ChannelProcessingFilter.class)
             .addFilterBefore(new VerifyTokenFilter(tokenUtil), UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(new GenerateTokenForUserFilter("/session", authenticationManager(), tokenUtil), UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests().antMatchers("/health").hasRole("SUPERUSER")

@@ -5,69 +5,91 @@
  */
 package com.github.noraui;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
-import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import java.util.Date;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.FormLoginRequestBuilder;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
+import com.github.noraui.identity.TokenUtil;
+import com.github.noraui.model.response.ResponseStatus;
+import com.github.noraui.model.session.SessionResponse;
+import com.github.noraui.model.user.Login;
+import com.google.gson.Gson;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class CountriesApplicationTests {
 
-    @Autowired
-    private MockMvc mockMvc;
+    private static final long VALIDITY_TIME_MS = 2 * 60 * 60 * 1000; // 2 hours validity
+    private static final String AUTH_HEADER_NAME = "Authorization";
+
+    private String secret = "mrin";
+
+    private TokenUtil tokenUtil;
+
+    @LocalServerPort
+    private int port;
 
     @Test
     public void loginWithValidUserThenAuthenticated() throws Exception {
-        FormLoginRequestBuilder login = formLogin()
-            .user("user")
-            .password("password");
-
-        mockMvc.perform(login)
-            .andExpect(authenticated().withUsername("user"));
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        headers.add("Content-Type", "application/json");
+        HttpEntity<Login> request = new HttpEntity<>(new Login("demo", "demo"), headers);
+        ResponseEntity<String> response = new TestRestTemplate().postForEntity("http://localhost:" + port + "/session", request, String.class);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Gson gson = new Gson();
+        SessionResponse sr = gson.fromJson(response.getBody(), SessionResponse.class);
+        Assert.assertEquals(ResponseStatus.SUCCESS, sr.getOperationStatus());
+        Assert.assertEquals("Login Success", sr.getOperationMessage());
+        Assert.assertEquals("demo", sr.getItem().getUserId());
+        Assert.assertEquals("Zinédine", sr.getItem().getFirstName());
+        Assert.assertEquals("Zidane", sr.getItem().getLastName());
+        Assert.assertEquals("zzidane@mail.com", sr.getItem().getEmail());
+        Assert.assertNull(sr.getItem().getRoles());
     }
+    //
+    // @Test
+    // public void loginWithInvalidUserThenUnauthenticated() throws Exception {
+    // FormLoginRequestBuilder login = formLogin().user("invalid").password("invalidpassword");
+    // mockMvc.perform(login).andExpect(unauthenticated());
+    // }
+    //
+    // @Test
+    // public void accessUnsecuredResourceThenOk() throws Exception {
+    // mockMvc.perform(get("/")).andExpect(status().isOk());
+    // }
+    //
+    // @Test
+    // public void accessSecuredResourceUnauthenticatedThenRedirectsToLogin() throws Exception {
+    // mockMvc.perform(get("/hello")).andExpect(status().is3xxRedirection()).andExpect(redirectedUrlPattern("**/login"));
+    // }
 
     @Test
-    public void loginWithInvalidUserThenUnauthenticated() throws Exception {
-        FormLoginRequestBuilder login = formLogin()
-            .user("invalid")
-            .password("invalidpassword");
-
-        mockMvc.perform(login)
-            .andExpect(unauthenticated());
-    }
-
-    @Test
-    public void accessUnsecuredResourceThenOk() throws Exception {
-        mockMvc.perform(get("/"))
-            .andExpect(status().isOk());
-    }
-
-    @Test
-    public void accessSecuredResourceUnauthenticatedThenRedirectsToLogin() throws Exception {
-        mockMvc.perform(get("/hello"))
-            .andExpect(status().is3xxRedirection())
-            .andExpect(redirectedUrlPattern("**/login"));
-    }
-
-    @Test
-    @WithMockUser
     public void accessSecuredResourceAuthenticatedThenOk() throws Exception {
-        mockMvc.perform(get("/hello"))
-                .andExpect(status().isOk());
+        String jwt = Jwts.builder().setExpiration(new Date(System.currentTimeMillis() + VALIDITY_TIME_MS)).setSubject("demo").claim("userId", 1).claim("role", "USER")
+                .signWith(SignatureAlgorithm.HS256, secret).compact();
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        headers.add("Content-Type", "application/json");
+        headers.add("Authorization", jwt);
+
+        ResponseEntity<String> entity = new TestRestTemplate().exchange("http://localhost:" + port + "/hello", HttpMethod.GET, new HttpEntity<>(headers), String.class);
+
+        Assert.assertEquals(HttpStatus.OK, entity.getStatusCode());
     }
 
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.noraui.model.response.OperationResponse;
-import com.github.noraui.model.response.OperationResponse.ResponseStatusEnum;
+import com.github.noraui.model.response.ResponseStatus;
 import com.github.noraui.model.user.User;
 import com.github.noraui.model.user.UserResponse;
 import com.google.common.base.Strings;
@@ -53,9 +53,9 @@ public class UserController {
 
         UserResponse resp = new UserResponse();
         if (provideUserDetails) {
-            resp.setOperationStatus(ResponseStatusEnum.SUCCESS);
+            resp.setOperationStatus(ResponseStatus.SUCCESS);
         } else {
-            resp.setOperationStatus(ResponseStatusEnum.NO_ACCESS);
+            resp.setOperationStatus(ResponseStatus.NO_ACCESS);
             resp.setOperationMessage("No Access");
         }
         resp.setData(user);
@@ -68,10 +68,10 @@ public class UserController {
         boolean userAddSuccess = userService.addNewUser(user);
         OperationResponse resp = new OperationResponse();
         if (userAddSuccess == true) {
-            resp.setOperationStatus(ResponseStatusEnum.SUCCESS);
+            resp.setOperationStatus(ResponseStatus.SUCCESS);
             resp.setOperationMessage("User Added");
         } else {
-            resp.setOperationStatus(ResponseStatusEnum.ERROR);
+            resp.setOperationStatus(ResponseStatus.ERROR);
             resp.setOperationMessage("Unable to add user");
         }
         return resp;

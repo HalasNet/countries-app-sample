@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.noraui.model.response.OperationResponse;
-import com.github.noraui.model.response.OperationResponse.ResponseStatusEnum;
+import com.github.noraui.model.response.ResponseStatus;
 
 @ControllerAdvice
 @RestController
@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = DataIntegrityViolationException.class)
     public OperationResponse handleBaseException(DataIntegrityViolationException e) {
         OperationResponse resp = new OperationResponse();
-        resp.setOperationStatus(ResponseStatusEnum.ERROR);
+        resp.setOperationStatus(ResponseStatus.ERROR);
         resp.setOperationMessage(e.getRootCause().getMessage());
         return resp;
     }

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan(basePackages = { "com.github.noraui.model" })
 @EnableTransactionManagement
 public class MainApp {
+
     public static void main(String[] args) throws Exception {
         new SpringApplication(MainApp.class).run(args);
     }

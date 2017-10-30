@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.noraui.model.product.Product;
 import com.github.noraui.model.product.ProductResponse;
 import com.github.noraui.model.response.OperationResponse;
-import com.github.noraui.model.response.OperationResponse.ResponseStatusEnum;
+import com.github.noraui.model.response.ResponseStatus;
 import com.github.noraui.repository.ProductRepo;
 
 import io.swagger.annotations.Api;
@@ -70,12 +70,12 @@ public class ProductController {
         System.out.println("Category:" + product.getCategory());
 
         if (this.productRepo.exists(product.getId())) {
-            resp.setOperationStatus(ResponseStatusEnum.ERROR);
+            resp.setOperationStatus(ResponseStatus.ERROR);
             resp.setOperationMessage("Unable to add Product - Product allready exist ");
         } else {
             // Product addedProduct = this.productRepo.save(product);
             this.productRepo.save(product);
-            resp.setOperationStatus(ResponseStatusEnum.SUCCESS);
+            resp.setOperationStatus(ResponseStatus.SUCCESS);
             resp.setOperationMessage("Product Added");
         }
         return resp;
@@ -87,10 +87,10 @@ public class ProductController {
         OperationResponse resp = new OperationResponse();
         if (this.productRepo.exists(productId)) {
             this.productRepo.delete(productId);
-            resp.setOperationStatus(ResponseStatusEnum.SUCCESS);
+            resp.setOperationStatus(ResponseStatus.SUCCESS);
             resp.setOperationMessage("Product Deleted");
         } else {
-            resp.setOperationStatus(ResponseStatusEnum.ERROR);
+            resp.setOperationStatus(ResponseStatus.ERROR);
             resp.setOperationMessage("No Product Exist");
         }
         return resp;

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.noraui.model.data.SingleSerise;
-import com.github.noraui.model.response.OperationResponse.ResponseStatusEnum;
+import com.github.noraui.model.response.ResponseStatus;
 import com.github.noraui.model.response.SingleDataSeriseResponse;
 
 import io.swagger.annotations.Api;
@@ -50,7 +50,7 @@ public class ProductStatsController {
             dataItemList.add(singleSerise);
         }
         resp.setItems(dataItemList);
-        resp.setOperationStatus(ResponseStatusEnum.SUCCESS);
+        resp.setOperationStatus(ResponseStatus.SUCCESS);
         resp.setOperationMessage("Orders by Quantity Ordered");
         // resp.setItems(singleSerise);
         return resp;
