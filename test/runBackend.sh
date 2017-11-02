@@ -19,7 +19,7 @@ if diff -w ../test/health.json target/actual_health.json
         echo SUCCESS
     else
         echo FAIL
-        exit 255
+        'exit 255
 fi
 
 curl --cookie cookie -s http://localhost:8084/api/v1/countries/all > target/actual_countries.json
@@ -34,7 +34,7 @@ if diff -w ../test/expected_countries_EN.json target/actual_countries.json
         echo SUCCESS
     else
         echo FAIL
-        exit 255
+        'exit 255
 fi
 
 echo "Let's look at the actual results: `cat target/actual_countries_EN.json`"
@@ -44,7 +44,7 @@ if diff -w ../test/expected_countries_EN.json target/actual_countries_EN.json
         echo SUCCESS
     else
         echo FAIL
-        exit 255
+        'exit 255
 fi
 
 echo "Let's look at the actual results: `cat target/actual_countries_FR.json`"
@@ -54,7 +54,7 @@ if diff -w ../test/expected_countries_FR.json target/actual_countries_FR.json
         echo SUCCESS
     else
         echo FAIL
-        exit 255
+        'exit 255
 fi
 
 exit 0
