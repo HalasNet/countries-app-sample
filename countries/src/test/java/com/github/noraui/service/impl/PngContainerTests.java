@@ -14,9 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.github.noraui.service.PngContainer;
@@ -25,15 +23,14 @@ import com.github.noraui.service.PngContainer;
  * Basic unit tests for PngContainerTests.
  * 
  * @author sgrillon
- *
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PngContainerTests {
-    
+
     @Autowired
     private PngContainer pngContainer;
-    
+
     @Test
     public void contexLoads() throws Exception {
         assertThat(pngContainer).isNotNull();
