@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "AGPL-3",
   "scripts": {
-    "start": "ng serve -prod",
+    "start": "ng serve",
     "serve": "ng serve -prod -aot=false",
     "build": "ng build -prod -aot=false"
   },
