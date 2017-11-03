@@ -1,9 +1,9 @@
 {
-  "name": "angular-springboot",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "countries-app-sample",
+  "version": "0.0.1",
+  "license": "AGPL-3",
   "scripts": {
-    "start": "ng serve -prod -aot=false",
+    "start": "ng serve -prod",
     "serve": "ng serve -prod -aot=false",
     "build": "ng build -prod -aot=false"
   },
