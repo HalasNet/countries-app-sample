@@ -2,6 +2,12 @@
 cd $(dirname $0)
 cd ../webclient
 
+echo "***** START ANGULAR INSTALLATION"
+npm install -g @angular/cli
+
+echo "***** NPM INSTALL"
+npm install
+
 echo "***** START ANGULAR APPLICATION"
 ng serve
 sleep 120
