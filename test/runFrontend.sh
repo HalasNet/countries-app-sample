@@ -9,7 +9,7 @@ echo "***** NPM INSTALL"
 npm install
 
 echo "***** START ANGULAR APPLICATION"
-ng serve
+npm start
 sleep 120
 
 echo "***** CURL to home url"
