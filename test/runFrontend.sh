@@ -15,5 +15,6 @@ sleep 120
 echo "***** CURL to home url"
 curl -s http://localhost:4200
 
+ls
 echo "***** END"
 exit 0
