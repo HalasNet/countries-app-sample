@@ -9,11 +9,12 @@ echo "***** NPM INSTALL"
 npm install
 
 echo "***** START ANGULAR APPLICATION"
-npm start
+npm start &
 sleep 120
 
 echo "***** CURL to home url"
 curl -s http://localhost:4200
 
+ls
 echo "***** END"
 exit 0
