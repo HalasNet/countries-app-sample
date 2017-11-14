@@ -57,7 +57,7 @@ public class CountriesApplicationTests {
         Assert.assertEquals(ResponseStatus.SUCCESS, sr.getOperationStatus());
         Assert.assertEquals("Login Success", sr.getOperationMessage());
         Assert.assertEquals("demo", sr.getItem().getUserId());
-        Assert.assertEquals("Zinédine", sr.getItem().getFirstName());
+        Assert.assertEquals("Zinedine", sr.getItem().getFirstName());
         Assert.assertEquals("Zidane", sr.getItem().getLastName());
         Assert.assertEquals("zzidane@mail.com", sr.getItem().getEmail());
         Assert.assertNull(sr.getItem().getRoles());
