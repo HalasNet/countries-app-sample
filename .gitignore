@@ -1,2 +1,5 @@
-/robot
-.idea
+/webclient/.vscode
+/webclient/node_modules
+/countries/.project
+/countries/target
+/countries/.idea
