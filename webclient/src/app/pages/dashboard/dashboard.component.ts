@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-	selector: 's-dashboard-pg',
-	templateUrl: './dashboard.component.html',
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
     styleUrls: [ './dashboard.scss'],
 })
 

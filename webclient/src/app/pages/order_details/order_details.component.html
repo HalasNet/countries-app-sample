@@ -1,4 +1,4 @@
-<div class="order-detail-pg pad-16">
+<div class="order-detail pad-16">
     <form [formGroup]="frmOrderDetail" novalidate>
         <h3> Order:{{orderId}} </h3>
         <br/>
@@ -7,12 +7,12 @@
                 <button clrTabLink>Order Line</button>
                 <clr-tab-content>
                     <br/>
-                    <table class="s-order-header">
+                    <table class="app-order-header">
                         <tr><td style="width:125px">Customer     </td> <td> {{orderDetailsRec.customerName}} ({{orderDetailsRec.customerId}}) </td></tr>
                         <tr><td>Email        </td> <td> {{orderDetailsRec.customerEmail}} </td></tr>
                         <tr><td>Order Status </td> <td> {{orderDetailsRec.orderStatus}} </td></tr>
                     </table>
-                    <table class="s-order-line table" style="width:100%;">
+                    <table class="app-order-line table" style="width:100%;">
                         <thead>
                             <tr>
                                 <th class="left" style="width:60px;">Code</th>

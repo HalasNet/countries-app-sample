@@ -1,23 +1,24 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Subject } from 'rxjs/Subject';
 import { ApiRequestService } from './api-request.service';
 import { TranslateService } from './translate.service';
-import { HttpParams} from "@angular/common/http";
+import { HttpParams} from '@angular/common/http';
 
 @Injectable()
 export class EmployeeService {
     constructor(
         private apiRequest: ApiRequestService,
-        private translate:TranslateService
+        private translate: TranslateService
     ) {}
 
-    getEmployees(page?:number, size?:number): Observable<any> {
-        //Create Request URL params
-        let me = this;
+    getEmployees(page?: number, size?: number): Observable<any> {
+        const me = this;
         let params: HttpParams = new HttpParams();
-        params = params.append('page', typeof page === "number"? page.toString():"0");
-        params = params.append('size', typeof page === "number"? size.toString():"1000");
-        return this.apiRequest.get('api/employees',params);
+        params = params.append('page', typeof page === 'number' ? page.toString() : '0');
+        params = params.append('size', typeof page === 'number' ? size.toString() : '1000');
+        return this.apiRequest.get('api/employees', params);
     }
 
 }

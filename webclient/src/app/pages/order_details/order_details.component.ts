@@ -1,27 +1,27 @@
-import { Component, OnInit,TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { OrderService } from '../../services/api/order.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { FormBuilder, FormGroup , FormControl,Validators} from '@angular/forms';
+import { FormBuilder, FormGroup , FormControl, Validators} from '@angular/forms';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-	selector: 's-orders-pg',
-	templateUrl: './order_details.component.html',
+    selector: 'app-orders-details',
+    templateUrl: './order_details.component.html',
     styleUrls: [ './order_details.scss'],
 })
 
 export class OrderDetailsComponent implements OnInit {
-    public orderId:number;
+    public orderId: number;
     public frmOrderDetail: FormGroup;
-    public orderDetailsRec:any={id:'',orderLine:[]};
-    public isOrderOnHold:boolean = false;
+    public orderDetailsRec: any = {id: '', orderLine: []};
+    public isOrderOnHoldfalse;
 
-    public rows=[];
-    public columns =[
-        {prop:"productName" , name: "Product"    , width:200 },
-        {prop:"productCode" , name: "Code"       , width:70  },
-        {prop:"category"    , name: "Category"   , width:100 },
-        {prop:"listPrice"   , name: "List Price" , width:70  }
+    public rows = [];
+    public columns = [
+        {prop: 'productName' , name: 'Product'    , width: 200 },
+        {prop: 'productCode' , name: 'Code'       , width: 70  },
+        {prop: 'category'    , name: 'Category'   , width: 100 },
+        {prop: 'listPrice'   , name: 'List Price' , width: 70  }
     ];
 
     constructor(
@@ -49,7 +49,7 @@ export class OrderDetailsComponent implements OnInit {
         });
 
         this.route.params.subscribe((p: Params) => {
-            this.orderId = p["id"];
+            this.orderId = p['id'];
             this.orderService.getOrderDetails(this.orderId).subscribe( resp => {
                 //this.orderRecord = resp[0];
                 this.frmOrderDetail.setValue({
@@ -69,7 +69,7 @@ export class OrderDetailsComponent implements OnInit {
                     shippedFee     : [resp[0].shippedFee]
                 });
                 this.frmOrderDetail = resp[0];
-                //this.isOrderOnHold  = resp[0].policyState.toUpperCase()==="ACTIVE"?true:false;
+                //this.isOrderOnHold  = resp[0].policyState.toUpperCase()==='ACTIVE'?true:false;
 
                 console.log(this.orderRecord );
 
@@ -83,34 +83,34 @@ export class OrderDetailsComponent implements OnInit {
     ngOnInit(): void {
 
         this.frmOrderDetail = this.formBuilder.group({
-            customerName   : ['',Validators.required],
-            customerEmail  : ['',Validators.required],
-            customerCompany: ['',Validators.required],
-            orderStatus    : ['',Validators.required],
-            orderDate      : ['',Validators.required],
+            customerName   : ['', Validators.required],
+            customerEmail  : ['', Validators.required],
+            customerCompany: ['', Validators.required],
+            orderStatus    : ['', Validators.required],
+            orderDate      : ['', Validators.required],
             paymentType    : [''],
             paidDate       : [''],
-            shipAddress1   : ['',Validators.required],
-            shipAddress2   : ['',Validators.required],
-            shipCity       : ['',Validators.required],
-            shipCountry    : ['',Validators.required],
-            shipState      : ['',Validators.required],
-            shippedDate    : ['',Validators.required],
-            shippedFee     : ['',Validators.required],
+            shipAddress1   : ['', Validators.required],
+            shipAddress2   : ['', Validators.required],
+            shipCity       : ['', Validators.required],
+            shipCountry    : ['', Validators.required],
+            shipState      : ['', Validators.required],
+            shippedDate    : ['', Validators.required],
+            shippedFee     : ['', Validators.required],
         });
         this.getData();
 
     }
 
-    getData(){
-        var me = this;
+    getData() {
+        const me = this;
         this.route.params
-        .switchMap( function(params: Params){
+        .switchMap( function(params: Params) {
             me.orderId = params['id'];
-            return me.orderService.getOrderDetails(params['id'])
+            return me.orderService.getOrderDetails(params['id']);
         })
-        .subscribe(function(resp){
-            console.log("Order details", resp[0]);
+        .subscribe(function(resp) {
+            console.log('Order details', resp[0]);
             me.frmOrderDetail.setValue({
                 customerName   : [resp[0].customerName],
                 customerEmail  : [resp[0].customerEmail],
@@ -128,16 +128,11 @@ export class OrderDetailsComponent implements OnInit {
                 shippedFee     : [resp[0].shippingFee]
             });
             me.orderDetailsRec = resp[0];
-
-
-
         });
     }
 
-    goBack(){
-        console.log("Back");
+    goBack() {
+        console.log('Back');
     }
-
-
 
 }

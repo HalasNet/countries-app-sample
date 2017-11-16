@@ -3,14 +3,14 @@ import { LoginService } from '../../services/api/login.service';
 import { Router } from '@angular/router';
 
 @Component({
-	selector   : 's-login-pg',
-	templateUrl: './login.component.html',
+    selector   : 'app-login',
+    templateUrl: './login.component.html',
     styleUrls  : [ './login.scss'],
 })
 
 export class LoginComponent implements OnInit {
     model: any = {};
-    errMsg:string = '';
+    errMsg = '';
     constructor(
         private router: Router,
         private loginService: LoginService) { }
@@ -23,23 +23,26 @@ export class LoginComponent implements OnInit {
     login() {
         this.loginService.getToken(this.model.username, this.model.password)
             .subscribe(resp => {
-                    if (resp.user === undefined || resp.user.token === undefined || resp.user.token === "INVALID" ){
+                    if (resp.user === undefined || resp.user.token === undefined || resp.user.token === 'INVALID') {
                         this.errMsg = 'Username or password is incorrect';
                         return;
                     }
                     this.router.navigate([resp.landingPage]);
                 },
                 errResponse => {
-                  switch(errResponse.status){
+                  switch (errResponse.status) {
                     case 401:
                       this.errMsg = 'Username or password is incorrect';
                       break;
                     case 404:
                       this.errMsg = 'Service not found';
+                      break;
                     case 408:
                       this.errMsg = 'Request Timedout';
+                      break;
                     case 500:
                       this.errMsg = 'Internal Server Error';
+                      break;
                     default:
                       this.errMsg = 'Server Error';
                   }
@@ -47,9 +50,8 @@ export class LoginComponent implements OnInit {
             );
     }
 
-    onSignUp(){
+    onSignUp() {
       this.router.navigate(['signup']);
     }
-
 
 }

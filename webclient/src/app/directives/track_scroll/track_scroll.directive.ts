@@ -1,7 +1,7 @@
-import { Directive, OnInit, Input, Output, HostListener, EventEmitter, ElementRef ,Inject, Injectable} from '@angular/core';
+import { Directive, OnInit, Input, Output, HostListener, EventEmitter, ElementRef , Inject, Injectable} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
-@Directive({ selector: '[trackScroll]' })
+@Directive({ selector: '[appTrackScroll]' })
 
 export class TrackScrollDirective {
     @Output() bottom = new EventEmitter<boolean>();
@@ -9,7 +9,7 @@ export class TrackScrollDirective {
 
     @HostListener('document:scroll', [])
     public track() {
-        if (document.body.scrollHeight == window.scrollY + window.innerHeight) {
+        if (document.body.scrollHeight === window.scrollY + window.innerHeight) {
              this.bottom.emit(true);
         }
     }
