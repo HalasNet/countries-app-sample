@@ -18,13 +18,13 @@ export class CustomerService {
         const me = this;
         let params: HttpParams = new HttpParams();
         params = params.append('page', typeof page === 'number' ? page.toString() : '0');
-        params = params.append('size', typeof page === 'number' ? size.toString() : '1000');
+        params = params.append('size', typeof size === 'number' ? size.toString() : '1000');
 
         const customerListSubject = new Subject<any>(); // Will use this subject to emit data that we want
 
         this.apiRequest.get('api/customers', params)
             .subscribe(jsonResp => {
-                const items = jsonResp.items.map(function(v, i, a) {
+                const items = jsonResp.items.map(function(v: any) {
                     const newRow = Object.assign({}, v, {
                         address: `${v.address1}, <br/> ${v.city}, ${v.state} ${v.postalCode} <br/> ${v.country}`
                     });

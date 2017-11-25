@@ -34,8 +34,7 @@ export class UserInfoService {
         try {
             const userInfoString = this.storage.getItem(this.currentUserKey);
             if (userInfoString) {
-                const userObj: UserInStorage = JSON.parse(this.storage.getItem(this.currentUserKey));
-                return userObj;
+                return JSON.parse(userInfoString);
             } else {
                 return null;
             }
@@ -49,7 +48,7 @@ export class UserInfoService {
     }
 
     getUserName(): string {
-        const userObj: UserInStorage = this.getUserInfo();
+        const userObj = this.getUserInfo();
         if (userObj !== null) {
             return userObj.displayName;
         }
@@ -57,7 +56,7 @@ export class UserInfoService {
     }
 
     getStoredToken(): string|null {
-        const userObj: UserInStorage = this.getUserInfo();
+        const userObj = this.getUserInfo();
         if (userObj !== null) {
             return userObj.token;
         }

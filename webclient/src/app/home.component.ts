@@ -67,7 +67,7 @@ export class HomeComponent   {
 
     }
 
-    navbarSelectionChange(val) {
+    navbarSelectionChange(val: any) {
         // console.log(val);
     }
 

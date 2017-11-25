@@ -17,12 +17,12 @@ export class ProductService {
         const me = this;
         let params: HttpParams = new HttpParams();
         params = params.append('page', typeof page === 'number' ? page.toString() : '0');
-        params = params.append('size', typeof page === 'number' ? size.toString() : '1000');
+        params = params.append('size', typeof size === 'number' ? size.toString() : '1000');
 
         const productList = new Subject<any>(); // Will use this subject to emit data that we want
         this.apiRequest.get('api/products', params)
             .subscribe(jsonResp => {
-                const returnObj = jsonResp.items.map(function(v, i, a) {
+                const returnObj = jsonResp.items.map(function(v: any) {
                     const newRow = Object.assign({}, v, {
                         listPrice   : me.translate.getCurrencyString(v.listPrice),
                         standardCost: me.translate.getCurrencyString(v.standardCost)

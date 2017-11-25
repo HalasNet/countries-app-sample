@@ -14,7 +14,7 @@ export class OrderDetailsComponent implements OnInit {
     public orderId: number;
     public frmOrderDetail: FormGroup;
     public orderDetailsRec: any = {id: '', orderLine: []};
-    public isOrderOnHoldfalse;
+    public isOrderOnHoldfalse: any;
 
     public rows = [];
     public columns = [

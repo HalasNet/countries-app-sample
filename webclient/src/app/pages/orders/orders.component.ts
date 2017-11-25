@@ -38,12 +38,12 @@ export class OrdersComponent implements OnInit {
 
     getPageData() {
         const me = this;
-        const legendColors = {'On Hold': '#ef2e2e', 'Shipped': '#ff8e28', 'Complete': '#61c673', 'New': '#007cbb'};
+        const legendColors: {[key: string]: string} = {'On Hold': '#ef2e2e', 'Shipped': '#ff8e28', 'Complete': '#61c673', 'New': '#007cbb'};
         me.isLoading = true;
         me.orderService.getOrderStats('status')
         .mergeMap(function(statusData) {
-            me.orderByStatusData = statusData.items.map(function(v, i, a) {
-                return {name: v.name, value: v.value, color: legendColors[v.name]};
+            me.orderByStatusData = statusData.items.map(function(v: any) {
+                return {name: v.name, value: v.value, color: legendColors[v.name as keyof typeof legendColors]};
             });
             console.log('Got Order Stats');
             return me.orderService.getOrderInfo();
